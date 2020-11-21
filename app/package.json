@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@capacitor/android": "^2.4.3",
     "@capacitor/cli": "^2.4.3",
     "@capacitor/core": "^2.4.3",
     "@testing-library/jest-dom": "^5.11.6",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -R www && react-scripts build && mv build www && npx cap copy",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
