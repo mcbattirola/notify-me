@@ -1,11 +1,25 @@
 package main
 
 import (
-	"notify-me/handler"
+	"github.com/gin-gonic/gin"
+	"github.com/mcbattirola/notify-me/server/handler"
+	"github.com/mcbattirola/notify-me/server/models"
 )
 
-const DB_NAME string = "notifyme"
+const DB_NAME = "testdb.db"
 
 func main() {
-	handler.SetupServer(DB_NAME).Run()
+	setupServer().Run()
+}
+
+// The engine with all endpoints is now extracted from the main function
+func setupServer() *gin.Engine {
+	r := gin.Default()
+
+	r.GET("/ping", handler.PingEndpoint)
+	r.GET("/register/:id", handler.RegisterEndpoint)
+
+	models.ConnectDataBase(DB_NAME)
+
+	return r
 }
