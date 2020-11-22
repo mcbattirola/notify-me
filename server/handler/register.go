@@ -6,10 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func PingGet() gin.HandlerFunc {
+func register() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		token := c.Param("token")
+		// add in db
+
+		// return ok or error msmg
 		c.JSON(http.StatusOK, map[string]string{
-			"hello": "Found me",
+			"ok": token,
 		})
 	}
 }
