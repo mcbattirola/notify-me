@@ -30,8 +30,12 @@ func assertContentTypeJSON(header http.Header, t *testing.T) {
 }
 
 func createTestServer() *httptest.Server {
-	ts := httptest.NewServer(handler.SetupServer("test-notifyme"))
+	println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>create test server")
+	ts := httptest.NewServer(handler.SetupServer("test-db.db"))
+
 	defer ts.Close()
+
+	println("\n\n---\nserver started\n---\n\n")
 
 	return ts
 }
