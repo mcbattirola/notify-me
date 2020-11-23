@@ -36,6 +36,26 @@ func TestRegisterRoute(t *testing.T) {
 	}
 }
 
+func TestListSenders(t *testing.T) {
+	ts := httptest.NewServer(setupServer())
+	defer ts.Close()
+
+	resp, err := http.Get(fmt.Sprintf("%s/sender", ts.URL))
+
+	assertNoErrors(resp, err, t)
+	assertContentTypeJSON(resp.Header, t)
+}
+
+func TestSenderRoute(t *testing.T) {
+	ts := httptest.NewServer(setupServer())
+	defer ts.Close()
+
+	resp, err := http.Get(fmt.Sprintf("%s/sender", ts.URL))
+
+	assertNoErrors(resp, err, t)
+	assertContentTypeJSON(resp.Header, t)
+}
+
 func assertNoErrors(resp *http.Response, err error, t *testing.T) {
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)

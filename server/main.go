@@ -6,7 +6,7 @@ import (
 	"github.com/mcbattirola/notify-me/server/models"
 )
 
-const DB_NAME = "testdb.db"
+const dbName = "prod.db"
 
 func main() {
 	setupServer().Run()
@@ -18,8 +18,9 @@ func setupServer() *gin.Engine {
 
 	r.GET("/ping", handler.PingEndpoint)
 	r.GET("/register/:id", handler.RegisterEndpoint)
+	r.GET("/sender", handler.GetSenders)
 
-	models.ConnectDataBase(DB_NAME)
+	models.ConnectDataBase(dbName)
 
 	return r
 }

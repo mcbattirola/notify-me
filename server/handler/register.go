@@ -28,6 +28,4 @@ func RegisterEndpoint(c *gin.Context) {
 			"ID": id,
 		})
 	}
-
-	// return ok or error msmg
 }
