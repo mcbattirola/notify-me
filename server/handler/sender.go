@@ -8,7 +8,7 @@ import (
 )
 
 type SenderDTO struct {
-	IP string `json: "IP" binding:"required"`
+	IP string `json:"IP" binding:"required"`
 }
 
 func GetSenders(c *gin.Context) {

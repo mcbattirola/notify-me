@@ -13,8 +13,8 @@ func RegisterEndpoint(c *gin.Context) {
 	// add in db
 
 	device := models.Device{
-		ID:         id,
-		Is_Enabled: true,
+		ID:        id,
+		IsEnabled: true,
 	}
 
 	result := models.DB.Create(&device)
