@@ -19,6 +19,7 @@ func setupServer() *gin.Engine {
 	r.GET("/ping", handler.PingEndpoint)
 	r.GET("/register/:id", handler.RegisterEndpoint)
 	r.GET("/sender", handler.GetSenders)
+	r.POST("/sender", handler.PostSender)
 
 	models.ConnectDataBase(dbName)
 

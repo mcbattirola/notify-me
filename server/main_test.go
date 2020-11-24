@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -36,6 +38,16 @@ func TestRegisterRoute(t *testing.T) {
 	}
 }
 
+func TestListSendersRoute(t *testing.T) {
+	ts := httptest.NewServer(setupServer())
+	defer ts.Close()
+
+	resp, err := http.Get(fmt.Sprintf("%s/sender", ts.URL))
+
+	assertNoErrors(resp, err, t)
+	assertContentTypeJSON(resp.Header, t)
+}
+
 func TestListSenders(t *testing.T) {
 	ts := httptest.NewServer(setupServer())
 	defer ts.Close()
@@ -46,11 +58,15 @@ func TestListSenders(t *testing.T) {
 	assertContentTypeJSON(resp.Header, t)
 }
 
-func TestSenderRoute(t *testing.T) {
+func TestCreateSendersRoute(t *testing.T) {
 	ts := httptest.NewServer(setupServer())
 	defer ts.Close()
 
-	resp, err := http.Get(fmt.Sprintf("%s/sender", ts.URL))
+	requestBody, err := json.Marshal(map[string]string{
+		"IP": "127.0.0.1",
+	})
+
+	resp, err := http.Post(fmt.Sprintf("%s/sender", ts.URL), "application/json", bytes.NewBuffer(requestBody))
 
 	assertNoErrors(resp, err, t)
 	assertContentTypeJSON(resp.Header, t)
