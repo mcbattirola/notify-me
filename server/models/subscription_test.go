@@ -4,7 +4,7 @@ import "testing"
 
 func TestCreateSubscription(t *testing.T) {
 	subscription := Subscription{
-		DeviceID: 1,
+		DeviceID: "1",
 		SenderID: 1,
 	}
 

@@ -8,6 +8,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/mcbattirola/notify-me/server/models"
+
 	"github.com/dchest/uniuri"
 )
 
@@ -76,12 +78,27 @@ func TestSubscribeRoute(t *testing.T) {
 	ts := httptest.NewServer(setupServer())
 	defer ts.Close()
 
-	requestBody, err := json.Marshal(map[string]string{
-		"sender": "1",
-		"device": "1",
+	requestBody, err := json.Marshal(models.Subscription{
+		SenderID: 5,
+		DeviceID: "1",
 	})
 
 	resp, err := http.Post(fmt.Sprintf("%s/subscribe", ts.URL), "application/json", bytes.NewBuffer(requestBody))
+
+	assertNoErrors(resp, err, t)
+	assertContentTypeJSON(resp.Header, t)
+}
+
+func TestCreateNotificationRoute(t *testing.T) {
+	ts := httptest.NewServer(setupServer())
+	defer ts.Close()
+
+	requestBody, err := json.Marshal(map[string]string{
+		"title": "message title",
+		"body":  "body",
+	})
+
+	resp, err := http.Post(fmt.Sprintf("%s/notification", ts.URL), "application/json", bytes.NewBuffer(requestBody))
 
 	assertNoErrors(resp, err, t)
 	assertContentTypeJSON(resp.Header, t)

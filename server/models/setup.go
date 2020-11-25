@@ -17,6 +17,7 @@ func ConnectDataBase(dbName string) {
 	database.AutoMigrate(&Device{})
 	database.AutoMigrate(&Sender{})
 	database.AutoMigrate(&Subscription{})
+	database.AutoMigrate(&Notification{})
 
 	DB = database
 }

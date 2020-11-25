@@ -12,7 +12,7 @@ func Subscribe(c *gin.Context) {
 	var input models.Subscription
 
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -22,6 +22,7 @@ func Subscribe(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
 	c.JSON(http.StatusOK, map[string]models.Subscription{
 		"data": subscription,
 	})
