@@ -10,3 +10,21 @@ func CreateSubscription(subscription Subscription) (Subscription, error) {
 
 	return subscription, result.Error
 }
+
+func GetSubscriptionsBySenderID(senderID uint) ([]Subscription, error) {
+	subscriptions := make([]Subscription, 0)
+
+	result := DB.Where(&Subscription{
+		SenderID: senderID,
+	}).Find(&subscriptions)
+
+	return subscriptions, result.Error
+}
+
+func ListSubscriptions() []Subscription {
+	var subscriptions []Subscription
+
+	DB.Find(&subscriptions)
+
+	return subscriptions
+}

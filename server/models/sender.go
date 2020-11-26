@@ -8,7 +8,6 @@ type Sender struct {
 
 func ListSenders() []Sender {
 	var senders []Sender
-
 	DB.Find(&senders)
 
 	return senders
@@ -24,4 +23,10 @@ func GetSenderById(id uint) Sender {
 	sender := Sender{}
 	DB.First(&sender, id)
 	return sender
+}
+
+func GetSenderByIp(ip string) (Sender, error) {
+	sender := Sender{}
+	result := DB.Where("IP = ?", ip).First(&sender)
+	return sender, result.Error
 }

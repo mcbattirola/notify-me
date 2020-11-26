@@ -27,3 +27,10 @@ func Subscribe(c *gin.Context) {
 		"data": subscription,
 	})
 }
+
+func GetSubscriptions(c *gin.Context) {
+	senders := models.ListSubscriptions()
+	c.JSON(200, gin.H{
+		"data": senders,
+	})
+}

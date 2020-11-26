@@ -20,6 +20,7 @@ func setupServer() *gin.Engine {
 	r.GET("/sender", handler.GetSenders)
 	r.POST("/sender", handler.PostSender)
 	r.POST("/subscribe", handler.Subscribe)
+	r.GET("/subscriptions", handler.GetSubscriptions)
 	r.POST("/notification", handler.PostNotification)
 
 	models.ConnectDataBase(dbName)
